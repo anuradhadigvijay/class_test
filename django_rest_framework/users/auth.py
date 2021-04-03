@@ -13,7 +13,7 @@ def authCheck(request):
         return 'Authentication credentials were not provided.'
     else:
         authorization = authorization.replace('JWT ','')
-        token = VopaUsers.objects.filter(token=authorization)
+        token = Users.objects.filter(token=authorization)
         if len(token) > 0:
             for uId in token:
                 userId = uId.user_id
@@ -24,7 +24,7 @@ def authCheck(request):
 def checkSuperAdmin(userId):
     checkUser =Users.objects.filter(id=userId)
     if len(checkUser) == 1 : 
-        getUser = VopaUsers.objects.get(id=userId)
+        getUser = Users.objects.get(id=userId)
         user_type = getUser.user_type 
 
         if str(user_type) == "SUPERADMIN" :  
